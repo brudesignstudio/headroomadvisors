@@ -60,6 +60,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -1085,6 +1087,7 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .promo-scroll {
   overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
   padding: 56px;
 }
@@ -2298,6 +2301,12 @@ table.compare-table {
   .post-grid { grid-template-columns: 1fr; }
   .form-glass { padding: 30px 24px; }
   .founding-banner { padding: 32px 24px; }
+  /* Wide placeholders: a wide aspect-ratio + a min-height transfers into a
+     large implied min-width (e.g. 21/7 + 150px = 450px), forcing side-scroll.
+     Some instances set these via inline styles, so !important is required to
+     win on mobile. Neutralizing the min-height floor lets the container drive
+     the width instead of the aspect ratio. */
+  .ph-wide { aspect-ratio: 3 / 2 !important; min-height: 0 !important; }
   .msf-dot { font-size: 0; }
   .msf-dot.active { font-size: 10px; }
   .scroll-cue { margin-top: 52px; }

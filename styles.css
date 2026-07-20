@@ -1158,7 +1158,7 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 
 @media (max-width: 980px) {
-  .promo-grid { grid-template-columns: 1fr; gap: 36px; }
+  .promo-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .promo-scroll { padding: 40px 30px; }
 }
 @media (max-width: 760px) {
@@ -2294,18 +2294,18 @@ table.compare-table {
 
 @media (max-width: 980px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .founding-banner { grid-template-columns: 1fr; padding: 40px; }
-  .contact-layout { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: 1fr; }
-  .page-hero-layout { grid-template-columns: 1fr; }
+  .founding-banner { grid-template-columns: minmax(0, 1fr); padding: 40px; }
+  .contact-layout { grid-template-columns: minmax(0, 1fr); }
+  .team-grid { grid-template-columns: minmax(0, 1fr); }
+  .page-hero-layout { grid-template-columns: minmax(0, 1fr); }
   .price-panel { position: static; }
   .value-grid { grid-template-columns: 1fr 1fr; }
   .usecase-grid { grid-template-columns: 1fr 1fr; }
   .included-grid { grid-template-columns: 1fr 1fr; }
-  .module-sub-grid { grid-template-columns: 1fr; }
-  .method-grid { grid-template-columns: 1fr; }
+  .module-sub-grid { grid-template-columns: minmax(0, 1fr); }
+  .method-grid { grid-template-columns: minmax(0, 1fr); }
   .post-grid { grid-template-columns: 1fr 1fr; }
-  .post-featured { grid-template-columns: 1fr; }
+  .post-featured { grid-template-columns: minmax(0, 1fr); }
   .post-featured .img-ph { border-right: none; border-bottom: 1px solid var(--glass-border); min-height: 240px; }
   .chapter-num { font-size: 80px; top: -42px; }
 }
@@ -2313,27 +2313,27 @@ table.compare-table {
 @media (max-width: 760px) {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
-  .nav-cta .btn-sm span.full-label { display: none; }
+  .nav-cta a.btn-sm { display: none; }
   .hero { padding: 160px 0 80px; }
   .hero-orb, .hero-ring { display: none; }
-  .problem-grid { grid-template-columns: 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
+  .problem-grid { grid-template-columns: minmax(0, 1fr); }
+  .services-grid { grid-template-columns: minmax(0, 1fr); }
   .section { padding: 90px 0; }
-  .form-grid { grid-template-columns: 1fr; }
-  .choice-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: minmax(0, 1fr); }
+  .choice-grid { grid-template-columns: minmax(0, 1fr); }
   .footer-top { flex-direction: column; }
   .footer-podcast { width: 100%; max-width: 400px; flex-basis: auto; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .page-hero { padding: 160px 0 70px; }
-  .value-grid { grid-template-columns: 1fr; }
-  .usecase-grid { grid-template-columns: 1fr; }
-  .included-grid { grid-template-columns: 1fr; }
-  .fit-grid { grid-template-columns: 1fr; }
-  .checklist { grid-template-columns: 1fr; }
-  .step-vertical { grid-template-columns: 1fr; gap: 8px; }
-  .stat-bar { grid-template-columns: 1fr; }
+  .value-grid { grid-template-columns: minmax(0, 1fr); }
+  .usecase-grid { grid-template-columns: minmax(0, 1fr); }
+  .included-grid { grid-template-columns: minmax(0, 1fr); }
+  .fit-grid { grid-template-columns: minmax(0, 1fr); }
+  .checklist { grid-template-columns: minmax(0, 1fr); }
+  .step-vertical { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .stat-bar { grid-template-columns: minmax(0, 1fr); }
   .stat-cell + .stat-cell { border-left: none; border-top: 1px solid var(--hairline); }
-  .post-grid { grid-template-columns: 1fr; }
+  .post-grid { grid-template-columns: minmax(0, 1fr); }
   .form-glass { padding: 30px 24px; }
   .founding-banner { padding: 32px 24px; }
   /* Wide placeholders: a wide aspect-ratio + a min-height transfers into a
@@ -2342,12 +2342,17 @@ table.compare-table {
      win on mobile. Neutralizing the min-height floor lets the container drive
      the width instead of the aspect ratio. */
   .ph-wide { aspect-ratio: 3 / 2 !important; min-height: 0 !important; }
+  /* Wide photos (e.g. the whiteboard banner) get cropped hard by cover at this
+     narrower ratio, cutting off subjects at the left/right edges. Show the
+     full frame instead, letterboxed on the container's own background. */
+  .img-ph.has-photo .ph-photo { object-fit: contain; }
   .msf-dot { font-size: 0; }
   .msf-dot.active { font-size: 10px; }
   .scroll-cue { margin-top: 52px; }
   .pullquote .qmark { font-size: 90px; margin-bottom: 24px; }
   .subscribe-inline { flex-direction: column; }
   .marquee { padding: 30px 0; }
+  .marquee-track { animation-duration: 22s; }
   .marquee-track .marquee-logo { height: 44px; }
   .marquee-track span::after { margin: 0 44px; }
 }

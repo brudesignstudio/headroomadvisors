@@ -323,14 +323,18 @@ document.querySelectorAll(".footer-podcast-embed[data-yt-fallback]").forEach((bo
 
   if (channel) {
     const feed = "https://www.youtube.com/feeds/videos.xml?channel_id=" + channel;
-    fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(feed))
-      .then((r) => (r.ok ? r.text() : Promise.reject()))
-      .then((xml) => {
-        const id = (xml.match(/<yt:videoId>([^<]+)<\/yt:videoId>/) || [])[1];
-        const title = (xml.match(/<entry>[\s\S]*?<title>([^<]+)<\/title>/) || [])[1];
+    // api.allorigins.win (the previous proxy) is a free, unauthenticated CORS
+    // relay with no uptime guarantee — it returns intermittent 520s, which is
+    // why the embed would silently keep the hardcoded fallback after publish.
+    // rss2json.com is built specifically for RSS-to-JSON and has been stable.
+    fetch("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(feed))
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((data) => {
+        const item = data.items && data.items[0];
+        const id = item && item.guid && item.guid.split(":").pop();
         if (id && !box.querySelector("iframe")) {
           state.id = id;
-          if (title) state.title = title;
+          if (item.title) state.title = item.title;
           renderThumb();
         }
       })

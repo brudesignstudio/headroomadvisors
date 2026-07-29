@@ -757,7 +757,7 @@ h1, h2, h3, h4, p { margin: 0; }
   display: flex; align-items: center; justify-content: center;
 }
 
-.ph-wide { aspect-ratio: 21 / 8; }
+.ph-wide { aspect-ratio: 16 / 9; }
 .ph-tall { aspect-ratio: 4 / 5; }
 .ph-square { aspect-ratio: 1 / 1; }
 
